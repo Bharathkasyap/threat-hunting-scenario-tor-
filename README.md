@@ -1,8 +1,6 @@
 <h1 align="center">Detection and Analysis of Unauthorized TOR Browser Usage</h1>
 
-<p align="center">
-<img src="img/tor-detection-banner.png" width="300" alt="TOR Detection Banner" /> </p>
-
+<img src="img/tor-detection-banner.png" width="300" alt="TOR Detection Banner" /> 
 
 ## Threat Hunt Report: Unauthorized TOR Usage
 - [Scenario Creation](https://github.com/Bharathkasyap/threat-hunting-scenario-tor-Bharath/blob/main/Update%20threat-hunting-scenario-tor-event-creation.md)
