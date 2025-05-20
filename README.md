@@ -185,10 +185,8 @@ This threat hunt successfully identified unauthorized use of the Tor Browser on 
    preserved for further investigation and as evidence.
 4. SIEM Rules Updated: Queries and alerts for TOR indicators (specific process names, file names, network ports, known TOR node IPs) were added to threat detection playbooks and the SIEM system to enhance future 
    detection capabilities.
-
----
-### playbooks and the SIEM system to enhance future detection capabilities.
-8. Recommendations
+ ---
+### Recommendations
 1. TOR Port Blocking: Block known TOR entry and exit node ports (e.g., 9001, 9030, 9050, 9150) at the perimeter firewall and internal network segments.
 2. Application Whitelisting: Implement application whitelisting (e.g., using AppLocker) to prevent the execution of unauthorized and unsigned portable applications like the TOR browser.
 3. DLP Monitoring: Enhance Data Loss Prevention (DLP) policies to alert on the creation or transfer of files with suspicious keywords such as .onion, market, tor_shopping, or other terms indicative of dark web 
@@ -197,5 +195,4 @@ This threat hunt successfully identified unauthorized use of the Tor Browser on 
    the implications of policy violations.
 5. Enhanced SIEM Visibility & Hunting: Regularly conduct proactive threat hunts focusing on DeviceFileEvents, DeviceNetworkEvents, and ProcessCommandLine arguments for known TOR indicators and suspicious patterns. 
    Integrate updated threat intelligence feeds for TOR nodes.
-
 ---
