@@ -1,6 +1,7 @@
+<p align="center">
+   
 ## Detection and Analysis of Unauthorized TOR Browser Usage
 
-<p align="center">
 <img src="img/tor-detection-banner.png" width="300" alt="TOR Detection Banner" /> </p>
 
 
