@@ -1,9 +1,9 @@
-##Detection and Analysis of Unauthorized TOR Browser Usage on Enterprise Workstations
+#Detection and Analysis of Unauthorized TOR Browser Usage on Enterprise Workstations
 
 <img src="img/tor-detection-banner.png" width="400" alt="TOR Detection Banner" />
 
 
-# Threat Hunt Report: Unauthorized TOR Usage
+## Threat Hunt Report: Unauthorized TOR Usage
 - [Scenario Creation](https://github.com/Bharathkasyap/threat-hunting-scenario-tor-Bharath/blob/main/Update%20threat-hunting-scenario-tor-event-creation.md)
 
 ## Platforms and Languages Leveraged
