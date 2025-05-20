@@ -1,4 +1,4 @@
-# Detection and Analysis of Unauthorized TOR Browser Usage on Enterprise Workstations
+# Detection and Analysis of Unauthorized TOR Browser Usage on Workstations
 
 <img src="img/tor-detection-banner.png" width="400" alt="TOR Detection Banner" />
 
