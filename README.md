@@ -1,4 +1,4 @@
-<h1 align="center">Detection and Analysis of Unauthorized TOR Browser Usage</h1>
+# Detection and Analysis of Unauthorized TOR Browser Usage
 
 <img src="img/tor-detection-banner.png" width="300" alt="TOR Detection Banner" /> 
 
