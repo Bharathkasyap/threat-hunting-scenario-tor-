@@ -1,4 +1,4 @@
-# Detection and Analysis of Unauthorized TOR Browser Usage
+## Detection and Analysis of Unauthorized TOR Browser Usage
 
 <img src="img/tor-detection-banner.png" width="300" alt="TOR Detection Banner" /> 
 
@@ -52,7 +52,7 @@ DeviceFileEvents
 ```
 <img width="1212" alt="image" src="img/Step_1.png">
 
-### Finding:
+### Findings:
 1. Portable TOR browser (tor-browser-windows-x86_64-portable-14.5.1.exe) found in Downloads folder (C:\Users\employee\Downloads).
 2. Found file named tor_shopping_list.txt created on the Desktop.
 3. SHA256 of installer: f563f1d863b08dd0bfe0435049865a9f74ec2d090995d2a73b70161bb2f34f10
@@ -134,7 +134,7 @@ DeviceFileEvents
 
 <img width="1212" alt="image" src="img/Step_5.png">
 
-### Finding:
+### Findings:
 1. File tor_shopping_list.txt created on the Desktop (C:\Users\employee\Desktop\tor_shopping_list.txt) at May 16, 2025, 4:44:36 PM.
 2. This file was subsequently modified (May 16, 2025, 8:51 PM & 8:52 PM) and then likely deleted, as indicated by later events in the broader timeline.
 3. Another file, Shopping_list.txt, was created in C:\Users\employee\Documents\Shopping_list.txt around the same time (May 16, 2025, 4:54 PM).
@@ -159,7 +159,7 @@ The following is a detailed chronological timeline of the events identified duri
 The tool automatically times out after being inactive for a while. The tool requires MFA, and the employee was observed entering their credentials. The tool is not allowed to be used for personal reasons.
 
 ---
-### MITRE ATT&CK Mapping
+## MITRE ATT&CK Mapping
 
 | **Tactic**        | **Technique**                         | **ID**    | **Description**                                                                 |
 | ----------------- | ------------------------------------- | --------- | ------------------------------------------------------------------------------- |
@@ -170,7 +170,7 @@ The tool automatically times out after being inactive for a while. The tool requ
 | Exfiltration      | Exfiltration Over C2 Channel          | T1041     | Data may have been exfiltrated using TOR’s hidden proxy infrastructure.         |
 
 ---
-### Recommendations
+## Recommendations
 1. TOR Port Blocking: Block known TOR entry and exit node ports (e.g., 9001, 9030, 9050, 9150) at the perimeter firewall and internal network segments.
 2. Application Whitelisting: Implement application whitelisting (e.g., using AppLocker) to prevent the execution of unauthorized and unsigned portable applications like the TOR browser.
 3. DLP Monitoring: Enhance Data Loss Prevention (DLP) policies to alert on the creation or transfer of files with suspicious keywords such as .onion, market, tor_shopping, or other terms indicative of dark web 
