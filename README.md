@@ -24,6 +24,16 @@ Management suspects that some employees may be using TOR browsers to bypass netw
 
 ---
 
+### Threat Hunt Methodology
+This threat hunt was conducted using a combination of endpoint detection and response (EDR) data and network logs. The following methodology was employed:
+1. Data Collection: Gathering relevant logs from the endpoint (DeviceFileEvents, DeviceProcessEvents) and network activity (DeviceNetworkEvents).
+2. Initial Analysis: Searching for TOR-related file and process activity on the endpoint.
+3. Network Analysis: Examining network connections for TOR-related traffic patterns (specific ports and IPs).
+4. Timeline Creation: Constructing a chronological timeline of events to understand the sequence of actions.
+5. MITRE ATT&CK Mapping: Mapping identified activities to the MITRE ATT&CK framework.
+6. Reporting: Documenting the findings, including the timeline, TTPs, and recommendations.
+---
+
 ## Steps Taken
 
 ### Step 1: File Discovery - TOR Installer
@@ -150,7 +160,17 @@ The following is a detailed chronological timeline of the events identified duri
 The tool automatically times out after being inactive for a while. The tool requires MFA, and the employee was observed entering their credentials. The tool is not allowed to be used for personal reasons.
 
 ---
+### MITRE ATT&CK Mapping
 
+| **Tactic**        | **Technique**                         | **ID**    | **Description**                                                                 |
+| ----------------- | ------------------------------------- | --------- | ------------------------------------------------------------------------------- |
+| Initial Access    | User Execution: Malicious File        | T1204.002 | TOR executable was manually executed by the user.                               |
+| Defense Evasion   | Obfuscated Files or Information       | T1027     | TOR uses encrypted channels, evading standard network monitoring tools.         |
+| Command & Control | Encrypted Channel: Non-Standard Ports | T1573.002 | TOR established connections over ports 9001 and 9150, common for TOR traffic.   |
+| Collection        | Data from Information Repositories    | T1213     | User created text files possibly containing sensitive or illicit shopping info. |
+| Exfiltration      | Exfiltration Over C2 Channel          | T1041     | Data may have been exfiltrated using TOR’s hidden proxy infrastructure.         |
+
+---
 ## Summary
 
 This threat hunt successfully identified unauthorized use of the Tor Browser on the **threathunt-tor** endpoint. The investigation confirmed the silent installation of a portable **TOR browser**, its execution, and subsequent anonymized browsing patterns, including connections to TOR network nodes and the creation of related **artifact files**. While **no direct data exfiltration** was definitively observed during this specific hunt, the circumvention of corporate security controls represents a **significant policy violation** and introduces a potential **risk vector for malicious activities or data leakage**. Immediate response actions, including endpoint isolation and stakeholder notification, were taken. Controls have been hardened through updated SIEM rules and recommendations for policy and technical control enhancements have been made to prevent recurrence and improve the organization's overall security posture.
@@ -165,5 +185,17 @@ This threat hunt successfully identified unauthorized use of the Tor Browser on 
    preserved for further investigation and as evidence.
 4. SIEM Rules Updated: Queries and alerts for TOR indicators (specific process names, file names, network ports, known TOR node IPs) were added to threat detection playbooks and the SIEM system to enhance future 
    detection capabilities.
+
+---
+### playbooks and the SIEM system to enhance future detection capabilities.
+8. Recommendations
+1. TOR Port Blocking: Block known TOR entry and exit node ports (e.g., 9001, 9030, 9050, 9150) at the perimeter firewall and internal network segments.
+2. Application Whitelisting: Implement application whitelisting (e.g., using AppLocker) to prevent the execution of unauthorized and unsigned portable applications like the TOR browser.
+3. DLP Monitoring: Enhance Data Loss Prevention (DLP) policies to alert on the creation or transfer of files with suspicious keywords such as .onion, market, tor_shopping, or other terms indicative of dark web 
+   activity or policy violation.
+4. User Awareness Training: Conduct regular user awareness training sessions to educate employees on acceptable use policies, the risks associated with anonymous browsing tools like TOR on corporate networks, and 
+   the implications of policy violations.
+5. Enhanced SIEM Visibility & Hunting: Regularly conduct proactive threat hunts focusing on DeviceFileEvents, DeviceNetworkEvents, and ProcessCommandLine arguments for known TOR indicators and suspicious patterns. 
+   Integrate updated threat intelligence feeds for TOR nodes.
 
 ---
