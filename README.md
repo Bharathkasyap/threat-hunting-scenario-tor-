@@ -43,6 +43,11 @@ DeviceFileEvents
 ```
 <img width="1212" alt="image" src="img/Step_1.png">
 
+### Finding:
+1. Portable TOR browser (tor-browser-windows-x86_64-portable-14.5.1.exe) found in Downloads folder (C:\Users\employee\Downloads).
+2. Found file named tor_shopping_list.txt created on the Desktop.
+3. SHA256 of installer: f563f1d863b08dd0bfe0435049865a9f74ec2d090995d2a73b70161bb2f34f10
+
 ---
 
 ### Step 2: Silent Installation Detection
@@ -62,6 +67,8 @@ DeviceProcessEvents
 ```
 <img width="1212" alt="image" src="img/Step_2.png">
 
+### Finding:
+1. TOR was installed silently using the /S command-line switch.
 ---
 
 ### Step 3: Application Execution - TOR Browser 
@@ -80,6 +87,8 @@ or ProcessCommandLine has_any ("start-tor-browser", "torproject.org", ".onion", 
 ```
 <img width="1212" alt="image" src="img/Step_3.png">
 
+### Finding:
+1. TOR browser launched (tor.exe), including multiple firefox.exe subprocesses, indicating active use.
 ---
 
 ### Step 4: Network Communication over TOR Ports
@@ -99,6 +108,9 @@ DeviceNetworkEvents
 ```
 <img width="1212" alt="image" src="img/Step_4.png">
 
+### Finding:
+1. Traffic observed to TOR relays (e.g., 88.99.7.87:9001, 157.90.112.145:9001) and .onion routing endpoints (e.g., https://www.cnb3hjryuakvppyf.com, https://www.jylm5scs4xrqbkrj.com).
+2. Connections to localhost proxy 127.0.0.1:9150 by firefox.exe
 ---
 ### Step 5: Artifact File Creation 
 Searched the DeviceFileEvents table for any other files created that could potentially be a threat, focusing on filenames containing 'shopping_list'. The query revealed the creation, modification, and deletion of files related to a shopping list on the user's desktop and in their recent items/documents folder.
@@ -112,6 +124,15 @@ DeviceFileEvents
 ```
 
 <img width="1212" alt="image" src="img/Step_5.png">
+
+### Finding:
+1. File tor_shopping_list.txt created on the Desktop (C:\Users\employee\Desktop\tor_shopping_list.txt) at May 16, 2025, 4:44:36 PM.
+2. This file was subsequently modified (May 16, 2025, 8:51 PM & 8:52 PM) and then likely deleted, as indicated by later events in the broader timeline.
+3. Another file, Shopping_list.txt, was created in C:\Users\employee\Documents\Shopping_list.txt around the same time (May 16, 2025, 4:54 PM).
+4. Link files (.lnk) for these shopping lists were also created in C:\Users\employee\AppData\Roaming\Microsoft\Windows\Recent\.
+5. This indicates the user might be collecting information or creating a list for personal use, potentially related to the TOR browser activity. The creation and subsequent modification/deletion within a few hours   
+   suggest active use and cleanup.
+
 
 ---
 ## Chronological Event Timeline 
@@ -132,12 +153,17 @@ The tool automatically times out after being inactive for a while. The tool requ
 
 ## Summary
 
-The user "employee" on the "threat-hunt-lab" device initiated and completed the installation of the TOR browser. They proceeded to launch the browser, establish connections within the TOR network, and created various files related to TOR on their desktop, including a file named `tor-shopping-list.txt`. This sequence of activities indicates that the user actively installed, configured, and used the TOR browser, likely for anonymous browsing purposes, with possible documentation in the form of the "shopping list" file.
+This threat hunt successfully identified unauthorized use of the Tor Browser on the **threathunt-tor** endpoint. The investigation confirmed the silent installation of a portable **TOR browser**, its execution, and subsequent anonymized browsing patterns, including connections to TOR network nodes and the creation of related **artifact files**. While **no direct data exfiltration** was definitively observed during this specific hunt, the circumvention of corporate security controls represents a **significant policy violation** and introduces a potential **risk vector for malicious activities or data leakage**. Immediate response actions, including endpoint isolation and stakeholder notification, were taken. Controls have been hardened through updated SIEM rules and recommendations for policy and technical control enhancements have been made to prevent recurrence and improve the organization's overall security posture.
 
 ---
 
 ## Response Taken
 
-TOR usage was confirmed on the endpoint `threat-hunt-lab` by the user `employee`. The device was isolated, and the user's direct manager was notified.
+1. Isolated Endpoint: Host threathunt-tor was removed from the network to prevent further unauthorized activity or potential data exfiltration.
+2. User Notification: HR and the user's direct manager were alerted regarding the policy violation and potential misuse of company assets.
+3. Artifacts Archived: The TOR installer (tor-browser-windows-x86_64-portable-14.5.1.exe), tor_shopping_list.txt file hashes, and relevant logs (DeviceFileEvents, DeviceProcessEvents, DeviceNetworkEvents) were 
+   preserved for further investigation and as evidence.
+4. SIEM Rules Updated: Queries and alerts for TOR indicators (specific process names, file names, network ports, known TOR node IPs) were added to threat detection playbooks and the SIEM system to enhance future 
+   detection capabilities.
 
 ---
