@@ -1,7 +1,7 @@
 ## Detection and Analysis of Unauthorized TOR Browser Usage
 
 
-<img src="img/tor-detection-banner.png" width="400" alt="TOR Detection Banner" />
+<img src="img/tor-detection-banner.png" width="300" alt="TOR Detection Banner" />
 
 
 ## Threat Hunt Report: Unauthorized TOR Usage
