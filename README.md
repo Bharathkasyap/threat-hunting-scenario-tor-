@@ -117,24 +117,14 @@ DeviceFileEvents
 ## Chronological Event Timeline 
 
 The following is a detailed chronological timeline of the events identified during the threat hunt:
-Timestamp
-Event
-Details
-2025-05-16 16:39:20
-Silent Installation Initiated
-tor-browser-windows-x86_64-portable-14.5.1.exe /S executed from Downloads folder.
-2025-05-16 16:40:21
-Tor.exe / Firefox.exe Launched
-Process creation logs confirm TOR browser execution (tor.exe and multiple firefox.exe instances).
-2025-05-16 16:41:24
-TOR Network Connection Established
-Outbound IP: 88.99.7.87 via port 9001 (TOR entry node). Connections to other TOR IPs and ports (9150) also observed.
-2025-05-16 16:44:36
-Shopping List File Created
-tor_shopping_list.txt created on Desktop. Shopping_list.txt also created in Documents.
-2025-05-16 20:52:25
-Shopping List Modified & Deleted
-tor_shopping_list.txt file changes observed, followed by deletion.
+| **Timestamp**       | **Event**                          | **Details**                                                                                        |
+| ------------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------- |
+| 2025-05-16 16:39:20 | Silent Installation Initiated      | `tor-browser-windows-x86_64-portable-14.5.1.exe /S` executed from Downloads folder.                |
+| 2025-05-16 16:40:21 | Tor.exe / Firefox.exe Launched     | Process creation logs confirm TOR browser execution (`tor.exe`, multiple `firefox.exe` instances). |
+| 2025-05-16 16:41:24 | TOR Network Connection Established | Outbound IP: `88.99.7.87` via port `9001`. Additional TOR traffic observed on port `9150`.         |
+| 2025-05-16 16:44:36 | Shopping List File Created         | `tor_shopping_list.txt` created on Desktop. `shopping_list.txt` also created in Documents.         |
+| 2025-05-16 20:52:25 | Shopping List Modified & Deleted   | `tor_shopping_list.txt` edited and later deleted.                                                  |
+
 
 The tool automatically times out after being inactive for a while. The tool requires MFA, and the employee was observed entering their credentials. The tool is not allowed to be used for personal reasons.
 
